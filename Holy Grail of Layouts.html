@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+	<title>Holy Grail of Layouts</title>
+	<style type="text/css" media="screen">
+		/* reset */
+		body{
+			height: 100%;
+			width: 100%;
+			padding: 0;
+			margin: 0;
+		}
+		html{
+			height: 100%;
+			width: 100%;
+		}
+		h4{ font-size:100%; }
+		/* layouts */
+		header,footer{
+			width: 100%;
+			height: 40px;
+			background: #4591E9;
+			text-align: center;
+		}
+		/* 容器不能设置宽度，宽度要自适应，限制宽度则不能实现padding的两端挤压 */
+		.container{
+			height: 200px;
+			padding:0 200px;
+			background: #AFAFAF;
+			overflow: hidden;
+			text-align: center;
+		}
+		/* 圣杯布局-通用定位 */
+		.col{
+			position: relative;
+			float: left;
+		}
+		/* 圣杯布局-修缮细节 */
+		.middle{
+			/* 中间宽度设定100%；撑开整个布局 */
+			width: 100%;
+			height: 200px;
+			background: #F4284D;
+		}
+		.left{
+			/* 左右宽高自定 */
+			width: 200px;
+			height: 200px;
+			/* 通过margin-left的负边距100% 强行挤到最左边 已经脱离文档流 */
+			margin-left: -100%;
+			background: #54C537;
+			/* padding给出一个固定块的宽度，移动补全那个空白定位 */
+			left: -200px;
+		}
+		.right{
+			width: 200px;
+			height: 200px;
+			/* 通过margin-left的负边距200px 强行挤出一个块的位置 已经脱离文档流 会浮动到最右边 */
+			margin-left:-200px;
+			background: #5E4DF4;
+			/* padding给出一个固定块的宽度，移动补全那个空白定位 */
+			right: -200px;
+		}
+	</style>
+</head>
+<body>
+	<header>Header</header>
+	<div class="container">
+	<!-- 代码级优先加载，将优先加载的块写在前面 -->
+		<div class="middle col"><h4>中间-自适应-优先加载</h4></div>
+	<!-- 由于代码顺序加载，左右两端需要使用浮动和position跳出布局 -->
+		<div class="left col"><h4>左固定</h4></div>
+		<div class="right col"><h4>右固定</h4></div>
+	</div>
+	<footer>Footer</footer>
+</body>
+</html>
